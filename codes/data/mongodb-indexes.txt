@@ -1,0 +1,3 @@
+db.trends.ensureIndex({woeid: 1});
+db.topic_users.ensureIndex({topic: 1});
+db.similarity.ensureIndex({topic1: 1, topic2: 1});

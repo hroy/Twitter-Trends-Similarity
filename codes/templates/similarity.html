@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>Similarity Matrix</h2>
+{% if rand_selection == 1%}
+<div class="alert alert-warning">
+    <h4>No topics selected</h4>
+    Randomly selected {{length(topics)}} topics. To select go to
+    <a href="{{ url_for('distinct') }}">Trending Topics</a> page.
+</div>
+{% endif %}
+
+<table class="table table-bordered">
+    <tr>
+        <th>&nbsp;</th>
+
+        {% for t in topics %}
+        <th>{{t}}</th>
+        {% endfor %}
+
+    </tr>
+
+    {% set row_count = length(similarity) %}
+    {% for i in range(0, row_count) %}
+    <tr>
+        {% set row = similarity[i] %}
+        <td class="row-name">{{ topics[i] }}</td>
+        {% for s in row %}
+        <td>
+            {{s}}
+        </td>
+
+        {% endfor %}
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

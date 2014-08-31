@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Available Places</h2>
+<ul>
+
+    {% for p in places %}
+    <li><a href="{{url_for('place', woeid=p['woeid'])}}">{{p['name']}}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

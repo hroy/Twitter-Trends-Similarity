@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+<h3>{{place['name']}}</h3>
+<ul>
+    <li><strong>Place Type: </strong> {{place['placeType']['name']}}</li>
+    <li><strong>Latitude: </strong> {{place['latitude']}}</li>
+    <li><strong>Longitude: </strong> {{place['longitude']}}</li>
+</ul>
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>Time</th>
+        <th colspan="10" class="text-center">
+            Trending topics
+        </th>
+    </tr>
+    {% for trend in trends %}
+    <tr>
+        <td>{{trend['created_at']}}</td>
+
+        {% for t in trend['trends'] %}
+        <td>{{t['name']}}</td>
+        {% endfor %}
+    </tr>
+
+    {% else %}
+    <tr>
+        <td colspan="11">No trend data found</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

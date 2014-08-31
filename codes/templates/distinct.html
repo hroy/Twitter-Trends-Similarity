@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block extra_header %}
+<script type="text/javascript">
+    $(function () {
+        $('.btn-select-all').on('click', function () {
+            $(':checkbox').prop('checked', true);
+            return false;
+        });
+        $('.btn-select-none').on('click', function () {
+            $(':checkbox').prop('checked', false);
+            return false;
+        });
+
+        $('.btn-random-10').on('click', function () {
+            var count = 0;
+            $(':checkbox').each(function () {
+
+                if (Math.random() <= 0.4 && count < 10) {
+                    $(this).prop('checked', true);
+                    count++;
+                } else {
+                    $(this).prop('checked', false);
+                }
+            });
+            return false;
+        });
+
+        $('.btn-random-50').on('click', function () {
+
+            $(':checkbox').each(function () {
+                $(this).prop('checked', Math.random() < 0.5);
+            });
+            return false;
+        });
+
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+
+
+<h2>Distinct Trending Topics (so far observed)</h2>
+<div class="well well-sm">
+    Select topics to see inter topic similarity.
+</div>
+
+<div>
+    <button class="btn-select-all btn btn-primary">Select All</button>
+    <button class="btn-select-none btn btn-primary">Select None</button>
+    <button class="btn-random-50 btn btn-primary">Random 50% Probability</button>
+    <button class="btn-random-10 btn btn-primary">Random 10</button>
+</div>
+
+<form id="topics_form" method="get" action="{{url_for('similarity')}}" class="form">
+    {% set topics_count = length(topics) %}
+    {% for i in range(0, topics_count) %}
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="topic_{{i}}" value="{{topics[i]}}">{{topics[i]}}
+        </label>
+    </div>
+    {% endfor %}
+    <input class="btn btn-success" type="submit" value="Check Similarity"> <br/>
+
+    <br/>
+</form>
+<div>
+    <button class="btn-select-all btn btn-primary">Select All</button>
+    <button class="btn-select-none btn btn-primary">Select None</button>
+    <button class="btn-random-50 btn btn-primary">Random 50% Probability</button>
+    <button class="btn-random-10 btn btn-primary">Random 10</button>
+</div>
+{% endblock %}
